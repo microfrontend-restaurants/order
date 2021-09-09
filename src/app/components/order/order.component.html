@@ -1,0 +1,64 @@
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <h1>My order</h1>
+    </div>
+</div>
+<ng-container *ngIf="hasItems">
+    <div class="card shadow mb-4" *ngFor="let result of groupedResult | keyvalue">
+        <div class="card-body">
+            <div class="card-title">
+                <h2>
+                    <order-restaurant [id]="toNumber(result.key)"></order-restaurant>
+                </h2>
+            </div>
+            <ul class="list-group list-group-flush mt-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th class="right">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of result.value">
+                            <td>
+                                {{order.item.name}}
+                            </td>
+                            <td>
+                                <input type="number" [value]="order.amount" style="width: 50px;" min="0"
+                                    (change)="onAmountChanged($event, order)">
+                            </td>
+                            <td class="right">
+                                <strong>{{(order.item.price * order.amount) | currency : 'EUR'}}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Total</td>
+                            <td></td>
+                            <td class="right">
+                                <strong>{{totalSum | currency : 'EUR'}}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-success me-2" (click)="completeOrder()">Complete order</button>
+            <button class="btn btn-danger" (click)="clearCart()">Clear cart</button>
+        </div>
+    </div>
+</ng-container>
+<div class="alert alert-info shadow" *ngIf="!hasItems && !loading">
+    <strong>No items added.</strong>
+    <div>Add items to the shopping cart before checking out.</div>
+</div>
