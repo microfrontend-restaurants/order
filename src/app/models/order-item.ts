@@ -1,4 +1,4 @@
-import { RestaurantItem } from "../../../../shared/models/restaurant-item";
+import { RestaurantItem } from "./restaurant-item";
 
 export interface OrderItem {
     amount: number,

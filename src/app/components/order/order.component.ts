@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/services/order.service';
-import { RestaurantItem } from '../../../../../shared/models/restaurant-item';
 import { OrderItem } from '../../models/order-item';
 
 @Component({
