@@ -82,7 +82,7 @@ export class OrderComponent implements OnInit {
     return sum;
   }
 
-  round(value: number) {
+  private round(value: number) {
     return Math.round(value * 100) / 100;
   }
 
