@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OrderComponent } from './components/order/order.component';
 import { EmptyRouteComponent } from './components/empty-route/empty-route.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 const routes: Routes = [
   /*
@@ -10,6 +11,7 @@ const routes: Routes = [
    * https://single-spa.js.org/docs/ecosystem-angular#configure-routes
    */
   { path: 'order', component: OrderComponent },
+  { path: 'order-history', component: OrderHistoryComponent },
   { path: '**', component: EmptyRouteComponent }
 ];
 

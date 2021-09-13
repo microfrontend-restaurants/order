@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/services/order.service';
+import { CommonUtils } from 'src/app/utils/common-utils';
 import { OrderItem } from '../../models/order-item';
 
 @Component({
@@ -48,6 +49,7 @@ export class OrderComponent implements OnInit {
     return Number(value);
   }
 
+  // Update item amount or remove item completely 
   onAmountChanged(result: any, orderItem: OrderItem) {
     orderItem.amount = result.target.value;
 
@@ -75,15 +77,11 @@ export class OrderComponent implements OnInit {
   get totalSum() {
     let sum = 0;
     this.keys.forEach(key =>
-      sum += this.groupedResult[key].map(i => this.round(i.amount * i.item.price))
+      sum += this.groupedResult[key].map(i => CommonUtils.round(i.amount * i.item.price))
         .reduce((sum, current) => sum + current, 0)
     );
 
     return sum;
-  }
-
-  private round(value: number) {
-    return Math.round(value * 100) / 100;
   }
 
   updateItemIds() {
@@ -99,16 +97,13 @@ export class OrderComponent implements OnInit {
 
     localStorage.setItem(this.KEY_CHECKOUT, JSON.stringify(itemIds));
 
-    const itemUpdatedEvent = new CustomEvent("order:orderCount_updated", {
-      bubbles: true,
-      detail: { count: itemIds.length }
-    });
-    window.dispatchEvent(itemUpdatedEvent);
+    this.notifyOrderChange(itemIds.length)
   }
 
   clearCart() {
     this.groupedResult = [];
     localStorage.removeItem(this.KEY_CHECKOUT);
+    this.notifyOrderChange(0);
   }
 
   completeOrder() {
@@ -120,10 +115,17 @@ export class OrderComponent implements OnInit {
     this.orderService.saveOrder({
       items: items,
       id: -1
-    }).subscribe(result => {
+    }).subscribe(() => {
         this.clearCart();
-    }, error => (
-      alert(error.message)
-    ));
+        // TODO show order successful message
+    }, error => alert(error.message));
+  }
+
+  private notifyOrderChange(count: number) {
+    const itemUpdatedEvent = new CustomEvent("order:orderCount_updated", {
+      bubbles: true,
+      detail: { count: count }
+    });
+    window.dispatchEvent(itemUpdatedEvent);
   }
 }

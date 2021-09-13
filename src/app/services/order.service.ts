@@ -33,4 +33,8 @@ export class OrderService {
   saveOrder(order: Order) {
     return this.httpClient.post<number>(`${environment.api}/order`, order);
   }
+
+  getOrders() {
+    return this.httpClient.get<Order[]>(`${environment.api}/order`);
+  }
 }

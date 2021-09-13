@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { OrderComponent } from './components/order/order.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RestaurantComponent } from './components/restaurant/restaurant.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    OrderHistoryComponent
   ],
   imports: [
     BrowserModule,
