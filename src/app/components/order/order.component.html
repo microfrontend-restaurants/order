@@ -58,7 +58,10 @@
         </div>
     </div>
 </ng-container>
-<div class="alert alert-info shadow" *ngIf="!hasItems && !loading">
+<div class="alert alert-info shadow" *ngIf="!hasItems && !loading && !orderCompleted">
     <strong>No items added.</strong>
     <div>Add items to the shopping cart.</div>
+</div>
+<div class="alert alert-success shadow" *ngIf="!hasItems && !loading && orderCompleted">
+    <strong>Order successful.</strong>
 </div>

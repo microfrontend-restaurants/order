@@ -16,6 +16,7 @@ export class OrderComponent implements OnInit {
 
   groupedResult: { [key: number]: OrderItem[] } = [];
   loading: boolean = true;
+  orderCompleted: boolean = false;
 
   constructor(
     private orderService: OrderService
@@ -84,7 +85,7 @@ export class OrderComponent implements OnInit {
     return sum;
   }
 
-  updateItemIds() {
+  private updateItemIds() {
     let itemIds: number[] = [];
 
     this.keys.forEach(key =>
@@ -117,6 +118,7 @@ export class OrderComponent implements OnInit {
       id: -1
     }).subscribe(() => {
         this.clearCart();
+        this.orderCompleted = true;
         // TODO show order successful message
     }, error => alert(error.message));
   }
