@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4202 --live-reload false",
+    "start": "concurrently \"ng serve --port 4202 --live-reload false\" \"http-server ./fragments -p 4205 -s\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -32,6 +32,8 @@
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "bootstrap": "^5.1.1",
+    "concurrently": "^6.3.0",
+    "http-server": "^13.0.2",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
