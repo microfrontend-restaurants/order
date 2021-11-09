@@ -5,7 +5,7 @@ class OrderAddButton extends HTMLElement {
             <i class="bi-plus"></i>
         </button>`
         this.querySelector("button").addEventListener("click", () => {
-            const id = this.getAttribute("id");
+            const id = +this.getAttribute("id");
             this.addItem(id);
         });
     }
