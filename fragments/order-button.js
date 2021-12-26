@@ -17,6 +17,11 @@ class OrderAddButton extends HTMLElement {
 
         localStorage.setItem("checkout", JSON.stringify(items));
 
+        // const channel = new BroadcastChannel("restaurant_channel");
+        // channel.postMessage({
+        //     type: "order:item_added", id: id
+        // })
+
         const event = new CustomEvent("order:item_added", {
             bubbles: true,
             detail: { id }

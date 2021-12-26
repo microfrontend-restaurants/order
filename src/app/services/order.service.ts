@@ -19,15 +19,13 @@ export class OrderService {
 
     ids.forEach(id => params = params.append("ids", id));
 
-    return this.httpClient.get<RestaurantItem[]>(`${environment.api}/restaurant/Items`, {
+    return this.httpClient.get<RestaurantItem[]>(`${environment.api}/order/Items`, {
       params: params
     });
   }
 
-  getRestaurantName(id: number, withItems: boolean = false) {
-    return this.httpClient.get<Restaurant>(`${environment.api}/restaurant/${id}`, {
-      params: new HttpParams().append("withItems", withItems)
-    }).pipe(map(result => result?.name));
+  getRestaurantName(id: number) {
+    return this.httpClient.get<Restaurant>(`${environment.api}/restaurant/${id}`).pipe(map(result => result?.name));
   }
 
   saveOrder(order: Order) {

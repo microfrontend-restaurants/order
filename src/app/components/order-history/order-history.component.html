@@ -1,27 +1,31 @@
 <div class="card shadow mb-4">
     <div class="card-body">
-        <h1>Order history</h1>
+        <h1>Past orders</h1>
     </div>
 </div>
 
-<div class="card shadow">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Order nr.</th>
-                    <th>Date</th>
-                    <th class="right">Total price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let order of orders">
-                    <td>{{order.id}}</td>
-                    <td>{{order.createdDate | date: 'medium'}}</td>
-                    <td class="right">{{getPrice(order) | currency: 'EUR'}}</td>
-                </tr>
-            </tbody>
-        </table>
+<ng-container *ngIf="orders.length > 0">
+    <div class="card shadow">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order nr.</th>
+                        <th>Date</th>
+                        <th class="right">Total price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td>{{order.id}}</td>
+                        <td>{{order.createdDate | date: 'medium'}}</td>
+                        <td class="right">{{getPrice(order) | currency: 'EUR'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+</ng-container>
+<div class="alert alert-info shadow" *ngIf="orders.length == 0">
+    <strong>No past orders.</strong>
 </div>
-
