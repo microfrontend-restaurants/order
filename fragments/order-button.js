@@ -1,11 +1,11 @@
 class OrderAddButton extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-        <button class="btn btn-sm btn-secondary">
+        <button id="order-button" class="btn btn-sm btn-secondary">
             <i class="bi-plus"></i>
-        </button>`
-        this.querySelector("button").addEventListener("click", () => {
-            const id = +this.getAttribute("id");
+        </button>`;
+        this.querySelector("#order-button").addEventListener("click", () => {
+            const id = +this.getAttribute("item-id");
             this.addItem(id);
         });
     }
@@ -17,16 +17,11 @@ class OrderAddButton extends HTMLElement {
 
         localStorage.setItem("checkout", JSON.stringify(items));
 
-        // const channel = new BroadcastChannel("restaurant_channel");
-        // channel.postMessage({
-        //     type: "order:item_added", id: id
-        // })
-
         const event = new CustomEvent("order:item_added", {
             bubbles: true,
             detail: { id }
         });
-        window.dispatchEvent(event);
+        this.dispatchEvent(event);
     }
 }
 window.customElements.define("order-add-button", OrderAddButton);

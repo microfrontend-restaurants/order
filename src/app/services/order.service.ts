@@ -2,8 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Order } from '../models/order';
-import { map } from 'rxjs/operators';
-import { Restaurant } from '../models/restaurant';
 import { RestaurantItem } from '../models/restaurant-item';
 
 @Injectable({
@@ -22,10 +20,6 @@ export class OrderService {
     return this.httpClient.get<RestaurantItem[]>(`${environment.api}/order/Items`, {
       params: params
     });
-  }
-
-  getRestaurantName(id: number) {
-    return this.httpClient.get<Restaurant>(`${environment.api}/restaurant/${id}`).pipe(map(result => result?.name));
   }
 
   saveOrder(order: Order) {
