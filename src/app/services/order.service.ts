@@ -17,16 +17,16 @@ export class OrderService {
 
     ids.forEach(id => params = params.append("ids", id));
 
-    return this.httpClient.get<RestaurantItem[]>(`${environment.api}/order/Items`, {
+    return this.httpClient.get<RestaurantItem[]>(`${environment.api}/orders/Items`, {
       params: params
     });
   }
 
   saveOrder(order: Order) {
-    return this.httpClient.post<number>(`${environment.api}/order`, order);
+    return this.httpClient.post<number>(`${environment.api}/orders`, order);
   }
 
   getOrders() {
-    return this.httpClient.get<Order[]>(`${environment.api}/order`);
+    return this.httpClient.get<Order[]>(`${environment.api}/orders`);
   }
 }
